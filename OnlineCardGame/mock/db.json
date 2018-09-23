@@ -1,0 +1,24 @@
+{
+    "languages": [
+        {
+            "id": "DE",
+            "words":{
+                "_home": "Home",
+                "_market": "Tauschbörse",
+                "_rules": "Regeln",
+                "_configure": "Konfiguration"
+    
+            }
+        },
+        {
+            "id": "EN",
+            "words":{
+                "_home": "Home",
+                "_market": "market",
+                "_rules": "rules",
+                "_configure": "configure"
+            }
+        }
+    ]
+        
+}

@@ -1,0 +1,14 @@
+.matchfieldCardSlot{
+    display: flex;
+}
+.top {
+    top: 0;
+    position: relative;
+}
+.bot {
+    position: absolute;
+    bottom: 0px;
+}
+:host{
+    height: 100%;
+}
