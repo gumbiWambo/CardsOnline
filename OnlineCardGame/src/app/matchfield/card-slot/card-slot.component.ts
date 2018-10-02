@@ -17,7 +17,5 @@ export class CardSlotComponent implements OnInit {
 
   ngOnInit() {
   }
-  test(){
-    alert("hallo");
-  }
+
 }
