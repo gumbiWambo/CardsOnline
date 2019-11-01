@@ -1,0 +1,48 @@
+<app-hand></app-hand>
+<div class="field">
+    <div [class]="'lane '+ laneKind1">
+        <div class="cardRow cardEffectRow enemy">
+            <div class="cardSlot" *ngFor="let card of effectSlotsEnemyLane1">
+                <app-card *ngIf="card.kind !== null"></app-card>
+            </div>
+        </div>
+        <div class="cardRow cardCreatureRow enemy">
+                <div class="cardSlot" *ngFor="let card of creatureSlotsEnemyLane1">
+                    <app-card *ngIf="card.kind !== null"></app-card>
+                </div>
+            </div>
+            <div class="cardRow cardEffectRow player ">
+                    <div class="cardSlot" *ngFor="let card of creatureSlotsPlayerLane1">
+                        <app-card *ngIf="card.kind !== null"></app-card>
+                    </div>
+                </div>
+                <div class="cardRow cardCreatureRow player">
+                        <div class="cardSlot" *ngFor="let card of effectSlotsPlayerLane1">
+                            <app-card *ngIf="card.kind !== null"></app-card>
+                        </div>
+                    </div>
+    </div>
+    <div [class]="'lane '+ landKind2">
+            <div class="cardRow cardEffectRow enemy">
+                <div class="cardSlot" *ngFor="let card of effectSlotsEnemyLane2">
+                    <app-card *ngIf="card.kind !== null"></app-card>
+                </div>
+            </div>
+            <div class="cardRow cardCreatureRow enemy">
+                    <div class="cardSlot" *ngFor="let card of creatureSlotsEnemyLane2">
+                        <app-card *ngIf="card.kind !== null"></app-card>
+                    </div>
+                </div>
+                <div class="cardRow cardEffectRow player ">
+                        <div class="cardSlot" *ngFor="let card of creatureSlotsPlayerLane2">
+                            <app-card *ngIf="card.kind !== null"></app-card>
+                        </div>
+                    </div>
+                    <div class="cardRow cardCreatureRow player">
+                            <div class="cardSlot" *ngFor="let card of effectSlotsPlayerLane2">
+                                <app-card *ngIf="card.kind !== null"></app-card>
+                            </div>
+                        </div>
+        </div>
+</div>
+<app-hand></app-hand>

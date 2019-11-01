@@ -1,0 +1,33 @@
+:host{
+    height: 100%;
+    width: 100%;
+}
+.cardRow{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+.cardSlot{
+    height: 170px;
+    width: 110px;
+    border: black 1px solid;
+}
+.field{
+    display: flex;
+    justify-content: space-around;
+}
+.lane{
+    width: 600px;
+}
+.magic{
+    background: blue;
+}
+.biot{
+    background: green;
+}
+.machine{
+    background: orange;
+}
+.babarian{
+    background: red;
+}

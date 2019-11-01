@@ -1,0 +1,26 @@
+:host{
+    height: 44px;
+    background: black;
+    color: white;
+    width: 100%;
+    z-index: 10
+}
+ul{
+    z-index: 10;
+    background: black;
+    color: white;
+    list-style: none;
+    li{
+        display: none;
+    }
+    &:hover{
+        li{
+            a{
+                background: black;
+                color: white;
+                text-decoration: none;
+            }
+            display: block
+        }
+    }
+}
