@@ -12,17 +12,16 @@ let game;
 let gameList = [];
 wss.on('connection', (ws) => {
     if (!game) {
-        game = new game_1.Game('magic', 'biot');
+        game = new game_1.Game('machine', 'magic');
     }
     if (!game.addPlayer(ws) || gameList.length > 0) {
         gameList.push(game);
         if (gameList.length !== 1) {
-            game = new game_1.Game('magic', 'biot');
+            game = new game_1.Game('machine', 'babarian');
         }
     }
     ws.on('message', (message) => {
         data.push(JSON.parse(message));
-        console.log(message);
     });
     ws.send(JSON.stringify({ author: 'Server', message: 'connected' }));
 });

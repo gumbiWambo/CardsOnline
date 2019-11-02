@@ -11,17 +11,16 @@ let game: Game;
 let gameList: Game[] = [];
 wss.on('connection', (ws: WebSocket) => {
     if(!game){
-        game = new Game('magic', 'biot');
+        game = new Game('machine', 'magic');
     }
     if(!game.addPlayer(ws) || gameList.length > 0) {
       gameList.push(game);
       if(gameList.length !== 1){
-        game = new Game('magic', 'biot');
+        game = new Game('machine', 'babarian');
       }
     }
 ws.on('message', (message: string) => {
     data.push(JSON.parse(message));
-    console.log(message);
  })
  ws.send(JSON.stringify({author: 'Server', message: 'connected'}));
 });

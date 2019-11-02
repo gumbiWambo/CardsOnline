@@ -33,7 +33,6 @@ export class FieldComponent implements OnInit {
         this.effectSlotsPlayerLane1 = next.leftLane.effectsSide2;
         this.effectSlotsPlayerLane2 = next.rightLane.effectsSide2;
 
-
         this.creatureSlotsEnemyLane1 = next.leftLane.creaturesSide1;
         this.creatureSlotsEnemyLane2 = next.rightLane.creaturesSide1;
         this.creatureSlotsPlayerLane1 = next.leftLane.creaturesSide2;
