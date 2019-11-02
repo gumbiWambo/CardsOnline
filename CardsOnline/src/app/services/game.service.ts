@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class GameService {
   private game = new BehaviorSubject<any>(null);
   public gameStarted = new BehaviorSubject<boolean>(false);
+  public gameField = new BehaviorSubject<any>(null);
   constructor(private webSocket: WebsocketService) {
     this.game = this.webSocket.connect(environment.webSocketAddress)
     this.game.pipe(
@@ -19,12 +20,26 @@ export class GameService {
       map(x => JSON.parse(x)),
       filter(x => x.hasOwnProperty('type')),
       filter(x => x.type === 'game'),
-      pluck('data')
+      pluck('data'),
+      filter(value => value.type === 'pre')
     ).subscribe(next => {
-      if(next.type === "pre"){
        this.gameStarted.next(next.gameStarted);
-      }
-      console.log(next);
     });
+    this.game.pipe(
+      filter(x => x !== null),
+      filter((data: MessageEvent) => !! data.data),
+      pluck('data'),
+      map(x => JSON.parse(x)),
+      filter(x => x.hasOwnProperty('type')),
+      filter(x => x.type === 'game'),
+      pluck('data'),
+      filter(value => value.type === 'field'),
+      pluck('field')
+    ).subscribe((next) => {
+      this.gameField.next(next);
+    })
+  }
+  sendAction() {
+    this.game.next('woop');
   }
 }

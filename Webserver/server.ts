@@ -6,14 +6,19 @@ import { Game } from './classes/game';
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({server});
-let playerAmount = 0;
 let data: any[] = [];
 let game: Game;
+let gameList: Game[] = [];
 wss.on('connection', (ws: WebSocket) => {
     if(!game){
         game = new Game('magic', 'biot');
     }
-    game.addPlayer(ws);
+    if(!game.addPlayer(ws) || gameList.length > 0) {
+      gameList.push(game);
+      if(gameList.length !== 1){
+        game = new Game('magic', 'biot');
+      }
+    }
 ws.on('message', (message: string) => {
     data.push(JSON.parse(message));
     console.log(message);

@@ -7,14 +7,22 @@ const game_1 = require("./classes/game");
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
-let playerAmount = 0;
 let data = [];
-const game = new game_1.Game();
+let game;
+let gameList = [];
 wss.on('connection', (ws) => {
-    game.addPlayer(ws);
+    if (!game) {
+        game = new game_1.Game('magic', 'biot');
+    }
+    if (!game.addPlayer(ws) || gameList.length > 0) {
+        gameList.push(game);
+        if (gameList.length !== 1) {
+            game = new game_1.Game('magic', 'biot');
+        }
+    }
     ws.on('message', (message) => {
         data.push(JSON.parse(message));
-        console.log(data);
+        console.log(message);
     });
     ws.send(JSON.stringify({ author: 'Server', message: 'connected' }));
 });
