@@ -10,7 +10,15 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('CardsOnline app is running!');
+    expect(page.getWelcomeTitle()).toEqual('Willkommen bei Cards Online');
+  });
+  it('should display Rules', () => {
+    page.navigateTo();
+    expect(page.getRules()).toEqual('Regeln');
+  });
+  it('should display header text \'Navigation\'', () => {
+    page.navigateTo();
+    expect(page.getHeaderText()).toEqual('Navigation');
   });
 
   afterEach(async () => {

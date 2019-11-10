@@ -39,7 +39,7 @@ export class GameService {
       this.gameField.next(next);
     })
   }
-  sendAction() {
-    this.game.next('woop');
+  sendAction(type: number, data: any) {
+    this.game.next({type, data});
   }
 }

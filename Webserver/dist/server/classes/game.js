@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const field_1 = require("./field");
 const card_1 = require("./card");
+const PlayerActionType_1 = require("../Enumerations/PlayerActionType");
 class Game {
     constructor(laneLeft, laneRight) {
         this.gameJoinable = true;
@@ -33,22 +34,43 @@ class Game {
     peparePlayer() {
         this.players.forEach((player) => {
             player.on('message', (action) => {
-                console.log(action);
-                this.field.setEffectLeftLane(0, 1, new card_1.Card('effect', 'magic', 2));
-                this.field.setEffectRightLane(0, 1, new card_1.Card('effect', 'magic', 2));
-                this.field.setEffectLeftLane(0, 2, new card_1.Card('effect', 'magic', 2));
-                this.field.setEffectRightLane(0, 2, new card_1.Card('effect', 'magic', 2));
-                this.field.setCreatureLeftLane(0, 1, new card_1.Card('creature', 'magic', 2));
-                this.field.setCreatureRightLane(0, 1, new card_1.Card('creature', 'magic', 2));
-                this.field.setCreatureLeftLane(0, 2, new card_1.Card('creature', 'magic', 2));
-                this.field.setCreatureRightLane(0, 2, new card_1.Card('creature', 'magic', 2));
-                this.field.setCreatureLeftLane(2, 1, new card_1.Card('creature', 'magic', 2));
-                this.field.setCreatureRightLane(4, 1, new card_1.Card('creature', 'magic', 2));
-                this.field.setCreatureLeftLane(3, 2, new card_1.Card('creature', 'magic', 2));
-                this.field.setCreatureRightLane(1, 2, new card_1.Card('creature', 'magic', 2));
+                this.handleAction(JSON.parse(action));
+                this.testSetField();
                 this.sendToAllPlayers('game', { type: 'field', field: this.field });
             });
         });
+    }
+    handleAction(action) {
+        if (action) {
+            switch (action.type) {
+                case PlayerActionType_1.PlayerActionType.SetEffect:
+                    console.log('Effect Set');
+                    break;
+                case PlayerActionType_1.PlayerActionType.SetCreature:
+                    console.log('Creature Set');
+                    break;
+                case PlayerActionType_1.PlayerActionType.ActivateCreature:
+                    console.log('Creature Activated');
+                    break;
+                case PlayerActionType_1.PlayerActionType.ActivateEffect:
+                    console.log('Effect Activated');
+                    break;
+            }
+        }
+    }
+    testSetField() {
+        this.field.setEffectLeftLane(0, 1, new card_1.Card('effect', 'magic', 2));
+        this.field.setEffectRightLane(0, 1, new card_1.Card('effect', 'magic', 2));
+        this.field.setEffectLeftLane(0, 2, new card_1.Card('effect', 'magic', 2));
+        this.field.setEffectRightLane(0, 2, new card_1.Card('effect', 'magic', 2));
+        this.field.setCreatureLeftLane(0, 1, new card_1.Card('creature', 'magic', 2));
+        this.field.setCreatureRightLane(0, 1, new card_1.Card('creature', 'magic', 2));
+        this.field.setCreatureLeftLane(0, 2, new card_1.Card('creature', 'magic', 2));
+        this.field.setCreatureRightLane(0, 2, new card_1.Card('creature', 'magic', 2));
+        this.field.setCreatureLeftLane(2, 1, new card_1.Card('creature', 'magic', 2));
+        this.field.setCreatureRightLane(4, 1, new card_1.Card('creature', 'magic', 2));
+        this.field.setCreatureLeftLane(3, 2, new card_1.Card('creature', 'magic', 2));
+        this.field.setCreatureRightLane(1, 2, new card_1.Card('creature', 'magic', 2));
     }
 }
 exports.Game = Game;
