@@ -8,6 +8,7 @@ import { routes } from '../app-routing.module';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  public showMenu: boolean = false;
   routes: string[] = [];
   constructor() { 
     routes.forEach(route => {

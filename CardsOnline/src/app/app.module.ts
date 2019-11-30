@@ -10,6 +10,8 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { CardComponent } from './card/card.component';
 import { HandComponent } from './hand/hand.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import { HandComponent } from './hand/hand.component';
     ShopComponent,
     HeaderComponent,
     CardComponent,
-    HandComponent
+    HandComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

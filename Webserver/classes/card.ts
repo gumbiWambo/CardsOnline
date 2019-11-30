@@ -1,6 +1,6 @@
 export class Card{
-  type: string = 'effect';
-  kind: string | null = 'magic';
+  type: string;
+  kind: string | null;
   costs: number = 0;
   constructor(type?: string, kind?: string, costs?: number) {
     this.type = !!type ? type : '';

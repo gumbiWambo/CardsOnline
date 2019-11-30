@@ -1,6 +1,14 @@
-<ul>
+<!-- <ul>
   Navigation
   <li *ngFor="let link of routes">
     <a [routerLink]="link">{{link}}</a>
   </li>
-</ul>
+</ul> -->
+<button (click)="showMenu = !showMenu;">ToggleMenu</button>
+<div *ngIf="showMenu" (click)="showMenu = !showMenu;" class="backdrop">
+  <div class="sideMenu">
+    <div *ngFor="let link of routes">
+        <a [routerLink]="link">{{link}}</a>
+    </div>
+  </div>
+</div>
