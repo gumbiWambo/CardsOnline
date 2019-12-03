@@ -13,9 +13,13 @@ export class AuthenticationService {
     this.register('Gumbi', 'Gumbi@Gumb.com', '1234567');
    }
 
-  register(username: string, email: string, password: string): Promise<any>{
-    const user = {username, email, password: this.b64tohex(password)};
+  async register(username: string, email: string, password: string): Promise<any>{
+    const key: any = await this.getRegisterKey();
+    const user = {username, email, password: this.b64tohex(password), key: key.key};
     return this.http.put(this.url + '/register', user, {}).toPromise();
+  }
+  getRegisterKey() {
+    return this.http.get(this.url + '/register').toPromise();
   }
   private b64tohex(s) {
     let ret = "";

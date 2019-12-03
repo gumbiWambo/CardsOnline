@@ -6,9 +6,12 @@ const WebSocket = require("ws");
 const bodyParser = require("body-parser");
 const game_1 = require("./classes/game");
 const authentication_1 = require("./classes/authentication");
+const database_1 = require("./classes/database");
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
+const authentication = authentication_1.Authentication.getInstace();
+const database = database_1.Database.getInstance();
 let data = [];
 let game;
 let gameList = [];
@@ -30,10 +33,14 @@ app.use(function (req, res, next) {
     next();
 });
 app.use(bodyParser.json());
+app.get('/register', (request, response) => {
+    response.send({ key: authentication.createRegisterSession() });
+});
 app.put('/register', (request, response) => {
-    console.log('Register-IP', request.ip);
-    console.log('Register-Request', request.body);
-    console.log('string', authentication_1.Authentication.generateRandomString());
+    // console.log('Register-IP', request.ip);
+    // console.log('Register-Request', request.body);
+    // console.log(authentication.validateRegisterSessionKey(request.body.key));
+    database.getPlayer();
     if (request.body === undefined) {
         response.status(400).send('No body defined');
     }
