@@ -29,4 +29,16 @@ export class Database {
       });
     });
   }
+  insertProfile(name: string, password: string, email: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      db.run(`INSERT INTO tblProfiles (szName, nPassword, szPicType, szEmail, nExperience, PicPath, LanguageLink, szSecret)
+      VALUES ('${name}', '${password}', '.jpg', '${email}', 10, 'pic', 1, 'hdfsdfhjklasdfhjkl')`,(error: any) => {
+        if(error){
+          console.error(error);
+          reject(!!error);
+        }
+        resolve(true);
+      });
+    });
+  }
 }

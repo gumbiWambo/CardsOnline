@@ -1,7 +1,10 @@
+import { Database } from "./database";
+
 let authentication: Authentication;
 export class Authentication {
   private registerSessions: Array<string> = [];
   private loginSessions = [];
+  private database: Database = Database.getInstance();
   public static getInstace(): Authentication {
     if (!authentication) {
       authentication = new Authentication();
@@ -15,6 +18,9 @@ export class Authentication {
   }
   public validateRegisterSessionKey(key: string): boolean {
     return !!this.registerSessions.find((x) => x === key);
+  }
+  public registerPlayer(username: string, password: string, email: string): Promise<boolean> {
+    return this.database.insertProfile(username, password, email);
   }
   private generateRandomString(): string {
     let randomString = '';

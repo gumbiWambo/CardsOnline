@@ -44,8 +44,16 @@ app.put('/register', (request, response) => {
     if (request.body === undefined) {
         response.status(400).send('No body defined');
     }
+    else if (!authentication.validateRegisterSessionKey(request.body.key)) {
+        response.status(401).send('Unauthorized');
+    }
     else {
-        response.status(200).send({ message: 'ok' });
+        console.log(request.body);
+        authentication.registerPlayer(request.body.username, request.body.password, request.body.email).then(() => {
+            response.status(200).send({ message: 'ok' });
+        }).catch(() => {
+            response.status(500).send('An error has happend! OOPSIE!');
+        });
     }
 });
 app.put('/login', (request, response) => { });
