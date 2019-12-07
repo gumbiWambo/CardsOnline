@@ -10,8 +10,8 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { CardComponent } from './card/card.component';
 import { HandComponent } from './hand/hand.component';
-import { AuthenticationComponent } from './authentication/authentication.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @NgModule({
   declarations: [
@@ -22,13 +22,13 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     CardComponent,
     HandComponent,
-    AuthenticationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthenticationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

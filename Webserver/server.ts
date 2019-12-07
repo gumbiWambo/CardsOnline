@@ -32,20 +32,32 @@ app.use(function(req, res, next) {
   next();
 });
 app.use(bodyParser.json());
+app.get('/login', (request, response) => {
+  response.send({key: authentication.createLoginSession()});
+});
+app.put('/login', async (request, response) => {
+  if(request.body === undefined) {
+    response.status(400).send('No body defined');
+  } else if (!!authentication.validateLoginSessionKey(request.body.key)) {
+    response.status(401).send('Unauthorized');
+  } else { 
+    const key = await authentication.loginPlayer(request.body.username, request.body.password)
+    if(!!key) {
+      response.status(200).send({ message: key});
+    } else {
+      response.status(401).send('Account data not Valid');
+    }
+  }
+});
 app.get('/register', (request, response) => {
-  response.send({key: authentication.createRegisterSession()})
+  response.send({key: authentication.createRegisterSession()});
 });
 app.put('/register', (request, response) => {
-  // console.log('Register-IP', request.ip);
-  // console.log('Register-Request', request.body);
-  // console.log(authentication.validateRegisterSessionKey(request.body.key));
-  database.getPlayer();
   if(request.body === undefined) {
     response.status(400).send('No body defined');
   } else if (!authentication.validateRegisterSessionKey(request.body.key)) {
     response.status(401).send('Unauthorized');
   } else {
-    console.log(request.body);
     authentication.registerPlayer(request.body.username, request.body.password, request.body.email).then(() => {
       response.status(200).send({message: 'ok'});
     }).catch(() => {
@@ -53,7 +65,6 @@ app.put('/register', (request, response) => {
     });
   }
 });
-app.put('/login', (request, response) => {});
 
 server.listen(1337, 'fabiangumbrecht', () => {
     console.log(`Server started on port ${JSON.stringify(server.address())}`);

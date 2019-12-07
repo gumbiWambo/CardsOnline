@@ -1,0 +1,27 @@
+<div *ngIf="!!showLogin">
+  <h1>Login</h1>
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+    <div>
+      <input type="text" ngModel placeholder="Username" name="username">
+      <input type="password" ngModel placeholder="Password" name="password">
+    </div>
+    <button>Einloggen</button>
+  </form>
+</div>
+<div *ngIf="!showLogin">
+  <h1>Register</h1>
+  <form #registrationForm="ngForm" (ngSubmit)="register(registrationForm)">
+    <div>
+      <input type="text" ngModel placeholder="Username" name="username">
+      <input type="text" ngModel placeholder="Email" name="email">
+      <input type="password" ngModel placeholder="Password" name="password">
+      <input type="password" ngModel placeholder="Repeat Password" name="repeatedPassword">
+    </div>
+    <button>Register</button>
+  </form>
+</div>
+<button (click)="showLogin = !showLogin">{{showLogin ? 'Register?' : 'Login?'}}</button>
+<div *ngIf="!!notEqual">
+      Password and Repeated Password are not equal!
+</div>
+
