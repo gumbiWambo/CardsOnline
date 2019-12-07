@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { pluck } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +9,27 @@ import { environment } from 'src/environments/environment';
 export class AuthenticationService {
   private url: string = environment.serverUrl;
   private b64pad = "=";
-  private b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  private b64map = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜabcdefghijklmnopqrstuvwxyzäöü0123456789+/";
   constructor(private http: HttpClient) {
-    this.register('Gumbi', 'Gumbi@Gumb.com', '1234567');
-   }
+  }
+  async login(username: string, password: string) {
+    const key: any = await this.getLoginKey();
+    return this.http.put<string>(this.url + '/login', {username, password: this.b64tohex(password), key}, {}).pipe(pluck('message')).toPromise();
+  }
 
   async register(username: string, email: string, password: string): Promise<any>{
     const key: any = await this.getRegisterKey();
     const user = {username, email, password: this.b64tohex(password), key: key.key};
     return this.http.put(this.url + '/register', user, {}).toPromise();
   }
-  getRegisterKey() {
+  private getRegisterKey() {
     return this.http.get(this.url + '/register').toPromise();
   }
-  private b64tohex(s) {
+  private getLoginKey() {
+    return this.http.get(this.url + '/login').toPromise()
+  }
+  private b64tohex(s: string) {
+    // s.toLocaleLowerCase();
     let ret = "";
     let i;
     let k = 0; // b64 state, 0-3
@@ -54,6 +62,7 @@ export class AuthenticationService {
     }
     if(k === 1)
         ret += String.fromCharCode(slop << 2);
-    return ret;
+    return ret.replace(/\0/g, '');
+    // return ret;
 }
 }

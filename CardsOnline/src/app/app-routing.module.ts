@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { FieldComponent } from './field/field.component';
 import { ShopComponent } from './shop/shop.component';
-import { AuthenticationComponent } from './authentication/authentication.component';
+import { AuthenticationComponent } from './authentication/authentication/authentication.component';
 
 
 export const routes: Routes = [
