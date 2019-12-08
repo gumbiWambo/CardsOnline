@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { FieldComponent } from './field/field.component';
 import { ShopComponent } from './shop/shop.component';
 import { AuthenticationComponent } from './authentication/authentication/authentication.component';
+import { FieldComponent } from './game/field/field.component';
+import { DeckComponent } from './deck/deck/deck.component';
 
 
 export const routes: Routes = [
@@ -11,7 +12,8 @@ export const routes: Routes = [
   {path: 'game', component: FieldComponent},
   {path: 'shop', component: ShopComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'login', component: AuthenticationComponent}
+  {path: 'login', component: AuthenticationComponent},
+  {path: 'deck', component: DeckComponent}
 ];
 
 @NgModule({

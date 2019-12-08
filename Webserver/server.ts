@@ -43,7 +43,7 @@ app.put('/login', async (request, response) => {
   } else { 
     const key = await authentication.loginPlayer(request.body.username, request.body.password)
     if(!!key) {
-      response.status(200).send({ message: key});
+      response.status(200).send({ message: key });
     } else {
       response.status(401).send('Account data not Valid');
     }

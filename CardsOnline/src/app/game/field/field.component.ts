@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService } from '../services/game.service';
 import { find } from 'rxjs/operators';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-field',
@@ -26,7 +26,6 @@ export class FieldComponent implements OnInit {
     }));
     this.game.gameField.subscribe(next => {
       if(next !== null) {
-        console.log(next);
         this.laneKind1 = next.leftLane.type;
         this.effectSlotsEnemyLane1 = next.leftLane.effectsSide1;
         this.effectSlotsEnemyLane2 = next.rightLane.effectsSide1;
